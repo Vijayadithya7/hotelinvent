@@ -1,0 +1,34 @@
+
+<h2>{{title}}</h2>
+
+    <table class="table">
+        <tr>
+            <th>Index</th>
+            <th>Even/odd</th>
+            <th>Room Number</th>
+            <th>Room Type</th>
+            <th>Amenities</th>
+            <th>Price</th>
+            <th>Checkin Time</th>
+            <th>Checkout Time</th>
+            <th>Rating</th>
+            <th>Select Room</th>
+        </tr>
+        <tr [ngClass]="e ? 'even' : 'odd'" *ngFor="let room of rooms | filter:price ;let e=even;let o=odd;let i=index">
+            <td>{{ i+1 }}</td>
+            <td>{{ e ? 'Even' : 'Odd'}}</td>
+            <td>{{room.roomNumber ? room.roomNumber : 'No Rooms'}}</td>
+            <td>{{room.roomType }}</td>
+            <td>{{room.amenities | titlecase}}</td>
+            <td>{{room.price | currency:'EUR'}}</td>
+            <td>{{room.checkinTime | date:'shortTime'}}</td>
+            <td>{{room.checkoutTime | date:'fullDate'}}</td>
+            <td>{{room.rating | number:'1.1-2'}}</td>
+            <td>
+                <!-- <button (click)="selectRoom(room)">
+                    Select
+                </button> -->
+                <button class="btn btn-primary" [routerLink]="['/booking',room.roomNumber]">Book Rooms</button>
+        </td>
+        </tr>
+    </table>
